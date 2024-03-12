@@ -1,59 +1,32 @@
 import random
 
-rock = '''
-    _______
----'   ____)
-      (_____)
-      (_____)
-      (____)
----.__(___)
-'''
+letters = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z', 'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z']
+numbers = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9']
+symbols = ['!', '#', '$', '%', '&', '(', ')', '*', '+']
 
-paper = '''
-    _______
----'   ____)____
-          ______)
-          _______)
-         _______)
----.__________)
-'''
+print("Welcome to the PyPassword Generator!")
+nr_letters = int(input("How many letters would you like in your password?\n")) 
+nr_symbols = int(input("How many symbols would you like?\n"))
+nr_numbers = int(input("How many numbers would you like?\n"))
 
-scissors = '''
-    _______
----'   ____)____
-          ______)
-       __________)
-      (____)
----.__(___)
-'''
+password_list = []
 
-game_images = [rock, paper, scissors]
+# Append random letters to the password list
+for _ in range(nr_letters):
+    password_list.append(random.choice(letters))
 
-user_choice = int(input("What do you choose? Type 0 for Rock, 1 for Paper or 2 for Scissors.\n"))
-print(game_images[user_choice])
+# Append random symbols to the password list
+for _ in range(nr_symbols):
+    password_list.append(random.choice(symbols))
 
-computer_choice = random.randint(0, 2)
-print("Computer chose:")
-print(game_images[computer_choice])
+# Append random numbers to the password list
+for _ in range(nr_numbers):
+    password_list.append(random.choice(numbers))
 
-if user_choice >= 3 or user_choice < 0: 
-  print("You typed an invalid number, you lose!") 
-elif user_choice == 0 and computer_choice == 2:
-  print("You win!")
-elif computer_choice == 0 and user_choice == 2:
-  print("You lose")
-elif computer_choice > user_choice:
-  print("You lose")
-elif user_choice > computer_choice:
-  print("You win!")
-elif computer_choice == user_choice:
-  print("It's a draw")
+# Shuffle the password list to randomize the characters
+random.shuffle(password_list)
 
-####### Debugging challenge: #########
-#Try running this code and type 5.
-#It will give you an IndexError and point to line 32 as the issue.
-#But on line 38 we are trying to prevent a crash by detecting
-#any numbers great than or equal to 3 or less than 0.
-#So what's going on?
-#Can you debug the code and fix it?
-#Solution: https://repl.it/@appbrewery/rock-paper-scissors-debugged-end
+# Convert the password list to a string
+password = ''.join(password_list)
+
+print(f"Your generated password is: {password}")
